@@ -1,6 +1,10 @@
+import sys
+sys.path.insert(0, '/Users/hlerman/FASTAPI/app')
+import config
 import fastapi
 from fastapi import FastAPI, Response, status, HTTPException
 from pydantic import BaseModel
+
 from typing import Optional
 from random import randrange
 import psycopg2
@@ -20,7 +24,7 @@ class Post(BaseModel):
 # connection to the database.
 while True:
     try:
-        conn = psycopg2.connect(host='localhost', database='fastapi', user='postgres', password='password123', cursor_factory=RealDictCursor)
+        conn = psycopg2.connect(host='localhost', database='fastapi', user= config.db_user, password= config.db_password, cursor_factory=RealDictCursor)
         cursor = conn.cursor()
         # with psycopg.connect("host=localhost dbname=fastapi user=postgres") as conn:
         #     with conn.cursor() as cur:       
@@ -31,19 +35,6 @@ while True:
         print("Error:", error)
         time.sleep(2)
         
-
-# a global variable to store the dictionary posts
-my_posts = [{'title': 'title of a post 1', 'content': 'content of post 1', 'id': 1}, {'title': 'Favorite food', 'content': 'I like Schnizel', 'id': 2}]
-
-def find_post(id):
-    for post in my_posts:
-        if post['id'] == id:
-            return post
-
-def find_index_post(id):
-    for index, post in enumerate(my_posts):
-        if post['id'] == id:
-            return index
 
 ########### PATH OPERATION / ROUTE ###########
 
