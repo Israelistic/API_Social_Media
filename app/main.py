@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, '/Users/hlerman/FASTAPI/app')
+sys.path.insert(0, '/Users/hlerman/Documents/development/python/FASTAPI/app')
 import config
 import fastapi
 from fastapi import FastAPI, Response, status, HTTPException
